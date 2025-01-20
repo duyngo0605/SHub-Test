@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1, width=device-width, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header aic df jcc">
+      <div class="icon-wrapper">
+        <div class="icon-container">
+          <img src="/Task2/images/networking.gif" 
+               alt="Networking icon"
+               class="icon-image">
+        </div>
+      </div>
+      <p class="header-title">Hoạt động tiêu biểu từ cộng đồng giáo dục</p>
+      <p class="header-description">
+        Hình ảnh được chính những giáo viên từ khắp 3 miền ghi lại trong quá trình giảng dạy, 
+        dạy học ứng dụng công nghệ SHub Classroom.
+      </p>
+    </div>
+    <div class="content aic jcc">
+      <div class="swiper df aic jcc">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide df aic jcc" >
+            <div class="df aic jcc slide-content" data-index="0">
+              <img src="/Task2/images/carousel1.png" alt="ImageSection-Item">
+            </div>
+          </div>
+          <div class="swiper-slide df aic jcc" >
+            <div class="df aic jcc slide-content" data-index="1">
+              <img src="/Task2/images/carousel2.png" alt="ImageSection-Item">
+            </div>
+          </div>
+          <div class="swiper-slide df aic jcc" >
+            <div class="df aic jcc slide-content" data-index="2">
+              <img src="/Task2/images/carousel3.png" alt="ImageSection-Item">
+            </div>
+          </div>
+          <div class="swiper-slide df aic jcc" >
+            <div class="df aic jcc slide-content" data-index="3">
+              <img src="/Task2/images/carousel4.png" alt="ImageSection-Item">
+            </div>
+          </div>
+          <div class="swiper-slide df aic jcc" >
+            <div class="df aic jcc slide-content" data-index="4">
+              <img src="/Task2/images/carousel5.png" alt="ImageSection-Item">
+            </div>
+          </div>
+          <div class="swiper-slide df aic jcc">
+            <div class="df aic jcc slide-content"  data-index="5">
+              <img src="/Task2/images/carousel6.png" alt="ImageSection-Item">
+            </div>
+          </div>
+          <div class="swiper-slide df aic jcc" >
+            <div class="df aic jcc slide-content" data-index="6">
+              <img src="/Task2/images/carousel1.png" alt="ImageSection-Item">
+            </div>
+          </div>
+          <div class="swiper-slide df aic jcc" >
+            <div class="df aic jcc slide-content" data-index="7">
+              <img src="/Task2/images/carousel2.png" alt="ImageSection-Item">
+            </div>
+          </div>
+          <div class="swiper-slide df aic jcc" >
+            <div class="df aic jcc slide-content" data-index="8">
+              <img src="/Task2/images/carousel3.png" alt="ImageSection-Item">
+            </div>
+          </div>
+          <div class="swiper-slide df aic jcc" >
+            <div class="df aic jcc slide-content" data-index="9">
+              <img src="/Task2/images/carousel4.png" alt="ImageSection-Item">
+            </div>
+          </div>
+          <div class="swiper-slide df aic jcc">
+            <div class="df aic jcc slide-content" data-index="10">
+              <img src="/Task2/images/carousel5.png" alt="ImageSection-Item">
+            </div>
+          </div>
+          <div class="swiper-slide df aic jcc" >
+            <div class="df aic jcc slide-content" data-index="11">
+              <img src="/Task2/images/carousel6.png" alt="ImageSection-Item">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-button centered df aic jcc nav-prev">
+        <button class="icon-button" title="Previous slide">
+          <svg viewBox="0 0 24 24">
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="nav-button centered df aic jcc nav-next">
+        <button class="icon-button" title="Next slide">
+          <svg viewBox="0 0 24 24">
+            <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  const swiping = () => {
+    const swiperWrapper = document.querySelector(".swiper-wrapper");
+    let isAnimating = false;
+
+    function getSlideWidth() {
+      const slides = Array.from(swiperWrapper.children); 
+      const firstSlide = slides[0].getBoundingClientRect();
+      const nextSlide = slides.find((slide) => slide !== slides[0]).getBoundingClientRect();
+      return nextSlide.x - firstSlide.x; 
+    }
+    function updateWrapperPosition(offset) {
+      swiperWrapper.style.transition = "transform 0.5s ease";
+      swiperWrapper.style.transform = `translateX(${offset}px)`;
+    }
+
+    const nextButton = document.querySelector(".nav-next .icon-button");
+    nextButton.addEventListener("click", () => {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      const slideWidth = getSlideWidth();
+
+      updateWrapperPosition(-slideWidth);
+
+      setTimeout(() => {
+        swiperWrapper.style.transition = "none";
+        swiperWrapper.appendChild(swiperWrapper.children[0]);
+        swiperWrapper.style.transform = "translateX(0)";
+        isAnimating = false;
+      }, 500);
+    });
+
+    const prevButton = document.querySelector(".nav-prev .icon-button");
+    prevButton.addEventListener("click", () => {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      const slideWidth = getSlideWidth();
+
+      swiperWrapper.style.transition = "none";
+      swiperWrapper.insertBefore(swiperWrapper.lastElementChild, swiperWrapper.firstElementChild);
+      swiperWrapper.style.transform = `translateX(-${slideWidth}px)`;
+
+      setTimeout(() => {
+        swiperWrapper.style.transition = "transform 0.5s ease";
+        swiperWrapper.style.transform = "translateX(0)";
+        isAnimating = false;
+      }, 0);
+    });
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    swiping();
+  });
+
+</script>
+</html>
